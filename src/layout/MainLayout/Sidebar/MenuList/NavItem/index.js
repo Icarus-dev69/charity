@@ -8,10 +8,13 @@ import { useTheme } from '@mui/material/styles';
 import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material';
 
 // project imports
-import { MENU_OPEN, SET_MENU } from 'store/actions';
+
 
 // assets
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+
+import { menuOpen, setMenu } from 'features/customizationSlice';
+
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
@@ -36,7 +39,7 @@ const NavItem = ({ item, level }) => {
 
     let itemTarget = '_self';
     if (item.target) {
-        itemTarget = '_blank';
+        itemTarget = '_self';
     }
 
     let listItemProps = {
@@ -47,8 +50,12 @@ const NavItem = ({ item, level }) => {
     }
 
     const itemHandler = (id) => {
-        dispatch({ type: MENU_OPEN, id });
-        if (matchesSM) dispatch({ type: SET_MENU, opened: false });
+        dispatch(menuOpen({id: id}));
+        if (matchesSM){
+            // dispatch({ type: SET_MENU, opened: false });
+            setMenu({opened : false})
+        }
+        
     };
 
     // active menu item on page load
@@ -57,8 +64,10 @@ const NavItem = ({ item, level }) => {
             .toString()
             .split('/')
             .findIndex((id) => id === item.id);
+        console.log(item)
         if (currentIndex > -1) {
-            dispatch({ type: MENU_OPEN, id: item.id });
+            // dispatch({ type: MENU_OPEN, id: item.id });
+            dispatch(menuOpen({id: item.id}))
         }
         // eslint-disable-next-line
     }, []);

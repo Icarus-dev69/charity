@@ -1,12 +1,12 @@
 import dashboard from './dashboard';
-import pages from './pages';
-import utilities from './utilities';
-import other from './other';
+import inviteFriends from './inviteFriends';
+import authentication from './realnameauthentication';
+import settings from './settings';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [dashboard, pages, utilities, other]
+    items: [dashboard,authentication, settings, inviteFriends]
 };
 
 export default menuItems;

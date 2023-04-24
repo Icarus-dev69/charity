@@ -11,11 +11,12 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Customization from '../Customization';
 import navigation from 'menu-items';
-import { drawerWidth } from 'store/constant';
-import { SET_MENU } from 'store/actions';
+import { drawerWidth } from 'app/constant';
+// import { SET_MENU } from 'store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
+import { setMenu } from 'features/customizationSlice';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
@@ -70,7 +71,8 @@ const MainLayout = () => {
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
-        dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
+        // dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
+        dispatch(setMenu({opened : !leftDrawerOpened}))
     };
 
     return (

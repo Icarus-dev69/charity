@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import { axiosInstance } from 'utils/axios';
 import {
     Box,
     Button,
@@ -34,6 +35,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
+import { setCredentials } from 'features/auth/authSlice';
+
+import {useNavigate} from "react-router"
+
+import Cookies from "universal-cookie"
+import jwt from "jwt-decode"
+
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -43,6 +51,9 @@ const FirebaseLogin = ({ ...others }) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const cookies = new Cookies()
 
     const googleHandler = async () => {
         console.error('Login');
@@ -55,6 +66,28 @@ const FirebaseLogin = ({ ...others }) => {
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
+    };
+
+    const login = async () => {
+        // try {
+        //     const res = await axiosInstance.post('/auth/login', {
+        //         username: 'kminchelle',
+        //         password: '0lelplR'
+        //     });
+        //     console.log(res);
+        //     if(res.status === 200){
+                dispatch(setCredentials({user : 'kminchelle', token :'token'}))
+                // const decodedToken = jwt(res.data.token)
+                // cookies.set("jwt_authorization", res.data.token,{
+                //     // expires : new Date(res.data.exp * 1000)
+                // })
+                navigate("/home")
+        //     }
+        // } catch (error) {
+        //     alert(error.message)
+        // }
+        
+        
     };
 
     return (
@@ -232,8 +265,9 @@ const FirebaseLogin = ({ ...others }) => {
                                     type="submit"
                                     variant="contained"
                                     color="secondary"
+                                    onClick={() => login()}
                                 >
-                                    Sign in
+                                    Sign In
                                 </Button>
                             </AnimateButton>
                         </Box>
