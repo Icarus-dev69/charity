@@ -28,8 +28,9 @@ const Register = () => {
                             <AuthCardWrapper>
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                                     <Grid item sx={{ mb: 3 }}>
-                                        <Link to="#">
-                                            <Logo />
+                                        <Link to="#" style={{textDecoration:"none",color:"black",fontSize:"20px"}}>
+                                            {/* <Logo /> */}
+                                            Peach
                                         </Link>
                                     </Grid>
                                     <Grid item xs={12}>
